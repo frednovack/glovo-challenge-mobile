@@ -12,12 +12,14 @@ import CoreLocation
 protocol MainScreenInteractorOutput {
     func updateMapWithUserPosition(location:CLLocation)
     func chooseLocationManually()
+    func chooseLocationWhenReady()
 }
 
 class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
     var presenter:MainScreenInteractorOutput?
+    
     
     func checkForLocationPermission(){
         let status = CLLocationManager.authorizationStatus()

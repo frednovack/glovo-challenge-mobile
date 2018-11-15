@@ -11,8 +11,9 @@ import CoreLocation
 import GoogleMaps
 
 class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
-    
+
     var viewController:MainScreenViewController?
+    var askToChooseACity = false
     
     func updateMapWithUserPosition(location: CLLocation) {
         guard let _ = viewController else {
@@ -22,6 +23,10 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
         let camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 6.0)
         viewController!.mapView.camera = camera
         
+    }
+    
+    func chooseLocationWhenReady() {
+        askToChooseACity = true
     }
     
     func focusMap(_ city:City){

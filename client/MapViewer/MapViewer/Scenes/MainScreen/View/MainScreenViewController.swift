@@ -14,6 +14,7 @@ class MainScreenViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     let interactor = MainScreenInteractor()
     let presenter = MainScreenPresenter()
+    var flagAskPermission = true
     
    init() {
         super.init(nibName: "MainScreenViewController", bundle: nil)
@@ -27,10 +28,14 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         interactor.presenter = presenter
         presenter.viewController = self
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        interactor.checkForLocationPermission()
+        if flagAskPermission{
+            flagAskPermission = false
+            interactor.checkForLocationPermission()
+        }
     }
 
     @IBAction func action(_ sender: Any) {
