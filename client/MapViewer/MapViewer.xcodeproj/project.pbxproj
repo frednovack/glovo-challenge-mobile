@@ -137,6 +137,7 @@
 		B65D7759219CE94D002321EB /* MapViewer */ = {
 			isa = PBXGroup;
 			children = (
+				B6A3364E219CF40400390692 /* Scenes */,
 				B65D775A219CE94D002321EB /* AppDelegate.swift */,
 				B65D775C219CE94D002321EB /* ViewController.swift */,
 				B65D775E219CE94D002321EB /* Main.storyboard */,
@@ -163,6 +164,21 @@
 				B65D777C219CE94E002321EB /* Info.plist */,
 			);
 			path = MapViewerUITests;
+			sourceTree = "<group>";
+		};
+		B6A3364E219CF40400390692 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B6A3364F219CF41100390692 /* StartScreen */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B6A3364F219CF41100390692 /* StartScreen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StartScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
