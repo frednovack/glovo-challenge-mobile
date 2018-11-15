@@ -8,21 +8,43 @@
 
 import Foundation
 import CoreLocation
+import GoogleMaps
 
 protocol MainScreenInteractorOutput {
     func updateMapWithUserPosition(location:CLLocation)
     func chooseLocationManually()
     func chooseLocationWhenReady()
+    
 }
 
 class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
     var presenter:MainScreenInteractorOutput?
+    var flagShouldCheckCoveredArea = true
     
     
     func checkForLocationPermission(){
         let status = CLLocationManager.authorizationStatus()
+        
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            if let presenter = presenter {
+                presenter.chooseLocationManually()
+            }
+            break
+        case .denied:
+            if let presenter = presenter {
+                presenter.chooseLocationManually()
+            }
+            break
+        default:
+            break
+        }
+        
         if status == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }else if status == .restricted || status == .denied{
@@ -35,6 +57,27 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
         locationManager.startUpdatingLocation()
         
     }
+    
+    func checkIfLocationIsCovered(location:CLLocation){
+        guard let cities = MapManager.shared.cities else {return}
+        var flagCoveredArea = false
+        for city in cities {
+            for encondedPath in city.workingArea {
+                let path = GMSPath(fromEncodedPath: encondedPath)
+                if GMSGeometryContainsLocation(location.coordinate, path!, true){
+                    flagCoveredArea = true
+                }
+            }
+        }
+        
+        if flagCoveredArea {
+            print("User is in Covered Area")
+        }else{
+            print("User is no in Covered Area")
+        }
+        
+    }
+    
     
     func fetchDataAndCheckForGPSPermission(){
         LocationChooserConfigurator().fetchCitiesAndCountries(success: { (cities, countries) in
@@ -53,6 +96,10 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
         }
         
         thePresenter.updateMapWithUserPosition(location: location)
+        if flagShouldCheckCoveredArea{
+            flagShouldCheckCoveredArea = false
+            checkIfLocationIsCovered(location: location)
+        }
 
     }
     
