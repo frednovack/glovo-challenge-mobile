@@ -14,7 +14,7 @@ protocol MainScreenInteractorOutput {
     func updateMapWithUserPosition(location:CLLocation)
     func chooseLocationManually()
     func chooseLocationWhenReady()
-    
+    func focusMap(_ city:City)
 }
 
 class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
@@ -60,18 +60,22 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
     
     func checkIfLocationIsCovered(location:CLLocation){
         guard let cities = MapManager.shared.cities else {return}
-        var flagCoveredArea = false
+        var cityOfCoverage:City?
         for city in cities {
             for encondedPath in city.workingArea {
                 let path = GMSPath(fromEncodedPath: encondedPath)
                 if GMSGeometryContainsLocation(location.coordinate, path!, true){
-                    flagCoveredArea = true
+                    cityOfCoverage = city
+                    
                 }
             }
         }
         
-        if flagCoveredArea {
+        if let city = cityOfCoverage {
             print("User is in Covered Area")
+            if let presenter = presenter {
+                presenter.focusMap(city)
+            }
         }else{
             print("User is not in Covered Area")
             if let presenter = presenter{

@@ -84,7 +84,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "../uncoveredArea.gpx"
+         identifier = "../coveredArea.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
