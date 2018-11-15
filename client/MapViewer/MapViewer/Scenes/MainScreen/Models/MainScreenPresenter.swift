@@ -34,8 +34,8 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
 
         for encondedPath in city.workingArea {
             let path = GMSPath(fromEncodedPath: encondedPath)
-            let polyline = GMSPolyline(path: path)
-            polyline.map = vc.mapView
+            let polygon = GMSPolygon(path: path)
+            polygon.map = vc.mapView
         }
         
         let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
