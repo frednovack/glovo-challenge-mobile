@@ -11,6 +11,7 @@ import CoreLocation
 
 protocol MainScreenInteractorOutput {
     func updateMapWithUserPosition(location:CLLocation)
+    func chooseLocationManually()
 }
 
 class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
@@ -24,6 +25,9 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
             locationManager.requestWhenInUseAuthorization()
         }else if status == .restricted || status == .denied{
             //Go To Selection Selection Screen
+            if let presenter = presenter {
+                presenter.chooseLocationManually()
+            }
         }
         locationManager.delegate = self
         locationManager.startUpdatingLocation()

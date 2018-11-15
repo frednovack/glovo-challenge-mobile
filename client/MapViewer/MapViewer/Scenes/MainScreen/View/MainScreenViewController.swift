@@ -27,8 +27,10 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         interactor.presenter = presenter
         presenter.viewController = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         interactor.checkForLocationPermission()
-
     }
 
     @IBAction func action(_ sender: Any) {

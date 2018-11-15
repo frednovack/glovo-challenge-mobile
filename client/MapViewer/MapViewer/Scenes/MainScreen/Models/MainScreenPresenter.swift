@@ -36,7 +36,13 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
         let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
         vc.mapView.camera = GMSCameraPosition.camera(withTarget: pointToFocus!.coordinate(at: 0), zoom: 13.0)
 
-        
+    }
+    
+    func chooseLocationManually() {
+        guard let vc = viewController else {return}
+        LocationChooserViewController(origin: vc).chooseLocation { (city) in
+            self.focusMap(city)
+        }
     }
     
     
