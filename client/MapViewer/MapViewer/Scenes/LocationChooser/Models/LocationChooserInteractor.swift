@@ -8,9 +8,13 @@
 
 import Foundation
 
-
+protocol LocationChooserInteractorOutput{
+    func failedToLoadCities()
+}
 
 class LocationChooserInteractor {
+    
+    var presenter:LocationChooserInteractorOutput?
     
     func fetchData(){
         
@@ -18,6 +22,9 @@ class LocationChooserInteractor {
             print("worked!")
         }) { (failString) in
             print(failString)
+            if let _ = self.presenter {
+                self.presenter!.failedToLoadCities()
+            }
         }
         
         

@@ -15,6 +15,7 @@
 		B610E58F219D0E4B00A48C76 /* LocationChooserConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610E58E219D0E4B00A48C76 /* LocationChooserConfigurator.swift */; };
 		B610E591219D103300A48C76 /* BaseConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610E590219D103300A48C76 /* BaseConnection.swift */; };
 		B610E593219D13DD00A48C76 /* LocationChooserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610E592219D13DD00A48C76 /* LocationChooserInteractor.swift */; };
+		B610E595219D172700A48C76 /* LocationChooserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610E594219D172700A48C76 /* LocationChooserPresenter.swift */; };
 		B65D775B219CE94D002321EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D775A219CE94D002321EB /* AppDelegate.swift */; };
 		B65D775D219CE94D002321EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D775C219CE94D002321EB /* ViewController.swift */; };
 		B65D7762219CE94D002321EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B65D7761219CE94D002321EB /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		B610E58E219D0E4B00A48C76 /* LocationChooserConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChooserConfigurator.swift; sourceTree = "<group>"; };
 		B610E590219D103300A48C76 /* BaseConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseConnection.swift; sourceTree = "<group>"; };
 		B610E592219D13DD00A48C76 /* LocationChooserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChooserInteractor.swift; sourceTree = "<group>"; };
+		B610E594219D172700A48C76 /* LocationChooserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChooserPresenter.swift; sourceTree = "<group>"; };
 		B65D7757219CE94D002321EB /* MapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65D775A219CE94D002321EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B65D775C219CE94D002321EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				B610E589219D06DE00A48C76 /* City.swift */,
 				B610E58E219D0E4B00A48C76 /* LocationChooserConfigurator.swift */,
 				B610E592219D13DD00A48C76 /* LocationChooserInteractor.swift */,
+				B610E594219D172700A48C76 /* LocationChooserPresenter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				B65D775B219CE94D002321EB /* AppDelegate.swift in Sources */,
 				B6A33652219CF72400390692 /* StartViewController.swift in Sources */,
 				B610E58F219D0E4B00A48C76 /* LocationChooserConfigurator.swift in Sources */,
+				B610E595219D172700A48C76 /* LocationChooserPresenter.swift in Sources */,
 				B610E58A219D06DE00A48C76 /* City.swift in Sources */,
 				B6A33660219D011900390692 /* MainScreenPresenter.swift in Sources */,
 			);

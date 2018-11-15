@@ -13,6 +13,7 @@ class LocationChooserViewController: UIViewController {
     var origin:UIViewController
     var completionBlock:((City)->())?
     var interactor = LocationChooserInteractor()
+    var presenter = LocationChooserPresenter()
     
     init(origin:UIViewController){
         self.origin = origin
@@ -25,6 +26,8 @@ class LocationChooserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.view = self
+        interactor.presenter = presenter
         interactor.fetchData()
         // Do any additional setup after loading the view.
     }
