@@ -19,8 +19,10 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
         guard let _ = viewController else {
             return
         }
-        
-        let camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 6.0)
+        let marker = GMSMarker(position: location.coordinate)
+        marker.title = "Current Location"
+        marker.map = viewController!.mapView
+        let camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 13)
         viewController!.mapView.camera = camera
         
     }

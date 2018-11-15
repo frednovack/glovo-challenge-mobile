@@ -73,7 +73,10 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
         if flagCoveredArea {
             print("User is in Covered Area")
         }else{
-            print("User is no in Covered Area")
+            print("User is not in Covered Area")
+            if let presenter = presenter{
+                presenter.chooseLocationManually()
+            }
         }
         
     }
@@ -94,6 +97,8 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
         guard let location = locations.last, let thePresenter = presenter else {
             return
         }
+
+        
         
         thePresenter.updateMapWithUserPosition(location: location)
         if flagShouldCheckCoveredArea{
