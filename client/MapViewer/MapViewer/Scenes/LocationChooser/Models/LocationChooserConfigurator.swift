@@ -12,6 +12,26 @@ import Alamofire
 
 class LocationChooserConfigurator : BaseConnection{
     
+    static func getAllCountries(success:@escaping (([Country])->()), failure:@escaping ((String)->())){
+        Alamofire.request(urlWithEndpoint("countries"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseArray { (response:DataResponse<[Country]>) in
+            
+            switch response.result {
+            case .success:
+                guard let result = response.value else {
+                    failure("Fail to parse object")
+                    return
+                }
+                
+                success(result)
+                
+                break
+            case .failure:
+                failure("Something is not right... request code > \(response.response?.statusCode ?? 1)")
+                break
+            }
+        }
+    }
+    
     static func getAllCities(success:@escaping (([City])->()), failure:@escaping ((String)->())){
         
         Alamofire.request(urlWithEndpoint("cities"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseArray { (response:DataResponse<[City]>) in

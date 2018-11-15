@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationChooserViewController" customModule="MapViewer" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="3QQ-jC-jpo" id="Bl6-KU-55H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +20,32 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3QQ-jC-jpo">
+                    <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ORa-hR-Nkw"/>
+                        <outlet property="delegate" destination="-1" id="xg5-ob-tlp"/>
+                    </connections>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sk3-Eg-oSH">
+                    <rect key="frame" x="29" y="56" width="310" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="sk3-Eg-oSH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="29" id="4QU-zl-5q4"/>
+                <constraint firstItem="sk3-Eg-oSH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="36" id="4vl-zZ-MMI"/>
+                <constraint firstItem="3QQ-jC-jpo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Fg6-sy-Xou"/>
+                <constraint firstItem="3QQ-jC-jpo" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="T2G-cB-3dq"/>
+                <constraint firstItem="3QQ-jC-jpo" firstAttribute="top" secondItem="sk3-Eg-oSH" secondAttribute="bottom" constant="48" id="YX3-Bk-b2y"/>
+                <constraint firstItem="3QQ-jC-jpo" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="cat-cG-G93"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sk3-Eg-oSH" secondAttribute="trailing" constant="36" id="jCO-44-QDS"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="134.48275862068968"/>
         </view>

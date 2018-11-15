@@ -8,12 +8,14 @@
 
 import UIKit
 
-class LocationChooserViewController: UIViewController {
+class LocationChooserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
 
     var origin:UIViewController
     var completionBlock:((City)->())?
     var interactor = LocationChooserInteractor()
     var presenter = LocationChooserPresenter()
+    @IBOutlet weak var tableView: UITableView!
     
     init(origin:UIViewController){
         self.origin = origin
@@ -37,7 +39,14 @@ class LocationChooserViewController: UIViewController {
         completionBlock = completion
     }
 
-
+    //MARK: - Table View Handlers
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
     
     /*
     // MARK: - Navigation

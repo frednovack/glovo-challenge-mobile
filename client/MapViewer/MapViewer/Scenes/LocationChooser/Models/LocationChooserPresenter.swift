@@ -12,6 +12,9 @@ import UIKit
 class LocationChooserPresenter : LocationChooserInteractorOutput{
     
     var view:LocationChooserViewController?
+
+    
+
     
     func failedToLoadCities() {
         guard let vc = view else {
@@ -23,6 +26,8 @@ class LocationChooserPresenter : LocationChooserInteractorOutput{
         vc.present(alert, animated: true, completion: nil)
         
     }
+    
+
 
     
 }
