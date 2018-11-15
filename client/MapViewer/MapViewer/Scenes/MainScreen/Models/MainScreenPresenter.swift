@@ -24,5 +24,20 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
         
     }
     
+    func focusMap(_ city:City){
+        guard let vc = viewController else {return}
+
+        for encondedPath in city.workingArea {
+            let path = GMSPath(fromEncodedPath: encondedPath)
+            let polyline = GMSPolyline(path: path)
+            polyline.map = vc.mapView
+        }
+        
+        let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
+        vc.mapView.camera = GMSCameraPosition.camera(withTarget: pointToFocus!.coordinate(at: 0), zoom: 13.0)
+
+        
+    }
+    
     
 }

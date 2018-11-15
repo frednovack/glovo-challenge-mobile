@@ -52,6 +52,12 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
         return presenter.cityCell(indexPath)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let completion = self.completionBlock else {return}
+        completion(interactor.cityForIndexPath(indexPath))
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return presenter.countryName(section)
     }
