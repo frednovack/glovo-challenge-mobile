@@ -15,6 +15,10 @@ class MainScreenViewController: UIViewController {
     let interactor = MainScreenInteractor()
     let presenter = MainScreenPresenter()
     var flagAskPermission = true
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var timeZoneLabel: UILabel!
     
    init() {
         super.init(nibName: "MainScreenViewController", bundle: nil)
@@ -36,6 +40,11 @@ class MainScreenViewController: UIViewController {
             flagAskPermission = false
             interactor.fetchDataAndCheckForGPSPermission()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        contentView.layer.cornerRadius = 4
     }
 
     @IBAction func action(_ sender: Any) {
