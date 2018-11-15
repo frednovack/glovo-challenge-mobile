@@ -16,6 +16,9 @@ class City:Mappable {
     var name:String!
     var countryCode:String!
     
+    init(){
+        
+    }
     
     required init?(map: Map) {
         

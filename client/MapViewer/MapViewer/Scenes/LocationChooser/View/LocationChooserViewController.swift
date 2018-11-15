@@ -9,7 +9,6 @@
 import UIKit
 
 class LocationChooserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
 
     var origin:UIViewController
     var completionBlock:((City)->())?
@@ -30,6 +29,7 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         presenter.view = self
         interactor.presenter = presenter
+        presenter.interactor = interactor
         interactor.fetchData()
         // Do any additional setup after loading the view.
     }
@@ -40,14 +40,25 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     //MARK: - Table View Handlers
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return interactor.numberOfCountries
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return interactor.citiesForCountry(interactor.countries![section]).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        return presenter.cityCell(indexPath)
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return presenter.countryName(section)
+    }
+    
+    @IBAction func action(_ sender: Any) {
+        completionBlock!(City())
+    }
     /*
     // MARK: - Navigation
 

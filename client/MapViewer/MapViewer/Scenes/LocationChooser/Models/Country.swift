@@ -13,6 +13,10 @@ class Country : Mappable{
     
     var code:String!
     var name:String!
+    
+    init(){
+        
+    }
 
     required init?(map: Map) {
         

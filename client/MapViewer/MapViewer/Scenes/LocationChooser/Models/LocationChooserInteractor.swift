@@ -9,10 +9,26 @@
 import Foundation
 
 protocol LocationChooserInteractorOutput{
-    func failedToLoadCities()
+    func failedToLoadData()
+    func bindData()
 }
 
-class LocationChooserInteractor {
+class LocationChooserInteractor : LocationChooserPresenterInput {
+    
+    func country(_ index: Int) -> Country {
+        return countries?[index] ?? Country()
+    }
+    
+    
+    func cityForIndexPath(_ index: IndexPath) -> City {
+        guard let countries = countries, let cities = cities else {
+            return City()
+        }
+        
+        return cities.filter({$0.countryCode ==  countries[index.section].code})[index.row]
+        
+    }
+    
     
     var presenter:LocationChooserInteractorOutput?
     var cities:[City]?
@@ -21,19 +37,23 @@ class LocationChooserInteractor {
     var totalRequests = 2
     let notificationID = "locationChooserView"
     var countries:[Country]?
+    
     var numberOfCountries:Int {
-        guard let returnedCities = cities else {
-            return 0
-        }
-        
-       return Dictionary(grouping: returnedCities, by: {$0.countryCode}).count
-        
+        return countries?.count ?? 0
     }
     
     init(){
         NotificationCenter.default.addObserver(self, selector: #selector(finishedRequest(notification:)), name: NSNotification.Name(rawValue: notificationID), object: nil)
     }
     
+    func citiesForCountry(_ country:Country)->[City]{
+        guard let theCities = cities else {
+            return [City]()
+        }
+        
+        return theCities.filter({$0.countryCode == country.code})
+        
+    }
     
     func fetchData(){
         
@@ -65,7 +85,7 @@ class LocationChooserInteractor {
         }
         guard let userInfo = notification.userInfo else {
 
-            pres.failedToLoadCities()
+            pres.failedToLoadData()
             return
         }
         
@@ -76,7 +96,7 @@ class LocationChooserInteractor {
         
         if requestsCounter == totalRequests {
             if flagRequestWithError {
-                pres.failedToLoadCities()
+                pres.failedToLoadData()
             }else{
                 self.finishedFetch()
             }
@@ -85,7 +105,8 @@ class LocationChooserInteractor {
     }
     
     func finishedFetch(){
-        print("finished fetch")
+        guard let presenter = presenter else { return }
+        presenter.bindData()
     }
     
 
