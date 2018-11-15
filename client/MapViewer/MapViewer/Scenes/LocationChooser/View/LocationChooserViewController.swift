@@ -1,5 +1,5 @@
 //
-//  MainScreenViewController.swift
+//  LocationChooserViewController.swift
 //  MapViewer
 //
 //  Created by Frederico Novack on 14/11/18.
@@ -7,28 +7,30 @@
 //
 
 import UIKit
-import GoogleMaps
 
-class MainScreenViewController: UIViewController {
+class LocationChooserViewController: UIViewController {
 
-    @IBOutlet weak var mapView: GMSMapView!
-    let interactor = MainScreenInteractor()
-    let presenter = MainScreenPresenter()
+    var origin:UIViewController
+    var completionBlock:((City)->())?
     
-   init() {
-        super.init(nibName: "MainScreenViewController", bundle: nil)
+    init(origin:UIViewController){
+        self.origin = origin
+        super.init(nibName: "LocationChooserViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        interactor.presenter = presenter
-        presenter.viewController = self
-        interactor.checkForLocationPermission()
 
+        // Do any additional setup after loading the view.
+    }
+    
+    func chooseLocation(completion:@escaping ((City)->())){
+        origin.present(self, animated: true, completion: nil)
+        completionBlock = completion
     }
 
 

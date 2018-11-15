@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4014471E3F5AEAEBDAD1E1D2 /* Pods_MapViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4664EF652DC45326AC6F50E /* Pods_MapViewerTests.framework */; };
 		948F9EB35A4537FB94F7CDE7 /* Pods_MapViewerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E840B9879E422767559DE944 /* Pods_MapViewerUITests.framework */; };
+		B610E586219D067A00A48C76 /* LocationChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610E584219D067A00A48C76 /* LocationChooserViewController.swift */; };
+		B610E587219D067A00A48C76 /* LocationChooserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B610E585219D067A00A48C76 /* LocationChooserViewController.xib */; };
+		B610E58A219D06DE00A48C76 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610E589219D06DE00A48C76 /* City.swift */; };
 		B65D775B219CE94D002321EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D775A219CE94D002321EB /* AppDelegate.swift */; };
 		B65D775D219CE94D002321EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D775C219CE94D002321EB /* ViewController.swift */; };
 		B65D7762219CE94D002321EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B65D7761219CE94D002321EB /* Assets.xcassets */; };
@@ -45,6 +48,9 @@
 		0864B6CEBE135E2F9BFC4F14 /* Pods-MapViewerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapViewerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapViewerUITests/Pods-MapViewerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0DE041217652D1A3432A2C97 /* Pods_MapViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E977B54E0D064157073E15 /* Pods-MapViewerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapViewerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapViewerTests/Pods-MapViewerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B610E584219D067A00A48C76 /* LocationChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChooserViewController.swift; sourceTree = "<group>"; };
+		B610E585219D067A00A48C76 /* LocationChooserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationChooserViewController.xib; sourceTree = "<group>"; };
+		B610E589219D06DE00A48C76 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		B65D7757219CE94D002321EB /* MapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65D775A219CE94D002321EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B65D775C219CE94D002321EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +128,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B610E582219D063B00A48C76 /* LocationChooser */ = {
+			isa = PBXGroup;
+			children = (
+				B610E588219D06C400A48C76 /* Models */,
+				B610E583219D066300A48C76 /* View */,
+			);
+			path = LocationChooser;
+			sourceTree = "<group>";
+		};
+		B610E583219D066300A48C76 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B610E584219D067A00A48C76 /* LocationChooserViewController.swift */,
+				B610E585219D067A00A48C76 /* LocationChooserViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B610E588219D06C400A48C76 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B610E589219D06DE00A48C76 /* City.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B65D774E219CE94D002321EB = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +210,7 @@
 		B6A3364E219CF40400390692 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B610E582219D063B00A48C76 /* LocationChooser */,
 				B6A33656219CF8EC00390692 /* MainScreen */,
 				B6A3364F219CF41100390692 /* StartScreen */,
 			);
@@ -339,6 +372,7 @@
 			files = (
 				B65D7765219CE94D002321EB /* LaunchScreen.storyboard in Resources */,
 				B6A3365B219CF90A00390692 /* MainScreenViewController.xib in Resources */,
+				B610E587219D067A00A48C76 /* LocationChooserViewController.xib in Resources */,
 				B65D7762219CE94D002321EB /* Assets.xcassets in Resources */,
 				B6A33653219CF72400390692 /* StartViewController.xib in Resources */,
 			);
@@ -484,11 +518,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B610E586219D067A00A48C76 /* LocationChooserViewController.swift in Sources */,
 				B6A3365E219CFAEC00390692 /* MainScreenInteractor.swift in Sources */,
 				B65D775D219CE94D002321EB /* ViewController.swift in Sources */,
 				B6A3365A219CF90A00390692 /* MainScreenViewController.swift in Sources */,
 				B65D775B219CE94D002321EB /* AppDelegate.swift in Sources */,
 				B6A33652219CF72400390692 /* StartViewController.swift in Sources */,
+				B610E58A219D06DE00A48C76 /* City.swift in Sources */,
 				B6A33660219D011900390692 /* MainScreenPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
