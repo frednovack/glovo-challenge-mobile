@@ -23,6 +23,7 @@
 		B65D7765219CE94D002321EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B65D7763219CE94D002321EB /* LaunchScreen.storyboard */; };
 		B65D7770219CE94E002321EB /* MapViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D776F219CE94E002321EB /* MapViewerTests.swift */; };
 		B65D777B219CE94E002321EB /* MapViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D777A219CE94E002321EB /* MapViewerUITests.swift */; };
+		B68F9428219E26D500F1CADF /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68F9427219E26D500F1CADF /* MapManager.swift */; };
 		B6A33652219CF72400390692 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A33650219CF72400390692 /* StartViewController.swift */; };
 		B6A33653219CF72400390692 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6A33651219CF72400390692 /* StartViewController.xib */; };
 		B6A3365A219CF90A00390692 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A33658219CF90A00390692 /* MainScreenViewController.swift */; };
@@ -73,6 +74,7 @@
 		B65D7776219CE94E002321EB /* MapViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65D777A219CE94E002321EB /* MapViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewerUITests.swift; sourceTree = "<group>"; };
 		B65D777C219CE94E002321EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B68F9427219E26D500F1CADF /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		B6A33650219CF72400390692 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		B6A33651219CF72400390692 /* StartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		B6A33658219CF90A00390692 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				B610E590219D103300A48C76 /* BaseConnection.swift */,
+				B68F9427219E26D500F1CADF /* MapManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				B610E586219D067A00A48C76 /* LocationChooserViewController.swift in Sources */,
 				B6A3365E219CFAEC00390692 /* MainScreenInteractor.swift in Sources */,
 				B610E593219D13DD00A48C76 /* LocationChooserInteractor.swift in Sources */,
+				B68F9428219E26D500F1CADF /* MapManager.swift in Sources */,
 				B610E597219D1C2400A48C76 /* Country.swift in Sources */,
 				B65D775D219CE94D002321EB /* ViewController.swift in Sources */,
 				B6A3365A219CF90A00390692 /* MainScreenViewController.swift in Sources */,

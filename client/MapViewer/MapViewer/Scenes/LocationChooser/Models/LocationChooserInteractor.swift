@@ -14,14 +14,16 @@ protocol LocationChooserInteractorOutput{
 }
 
 class LocationChooserInteractor : LocationChooserPresenterInput {
+
+    var presenter:LocationChooserInteractorOutput?
     
     func country(_ index: Int) -> Country {
-        return countries?[index] ?? Country()
+        return MapManager.shared.countries?[index] ?? Country()
     }
     
     
     func cityForIndexPath(_ index: IndexPath) -> City {
-        guard let countries = countries, let cities = cities else {
+        guard let countries = MapManager.shared.countries, let cities = MapManager.shared.cities else {
             return City()
         }
         
@@ -30,24 +32,32 @@ class LocationChooserInteractor : LocationChooserPresenterInput {
     }
     
     
-    var presenter:LocationChooserInteractorOutput?
-    var cities:[City]?
-    var flagRequestWithError:Bool = false
-    var requestsCounter = 0
-    var totalRequests = 2
-    let notificationID = "locationChooserView"
-    var countries:[Country]?
-    
     var numberOfCountries:Int {
-        return countries?.count ?? 0
+        return MapManager.shared.countries?.count ?? 0
     }
     
     init(){
-        NotificationCenter.default.addObserver(self, selector: #selector(finishedRequest(notification:)), name: NSNotification.Name(rawValue: notificationID), object: nil)
+
+    }
+    
+    func fetchDataIfNeeded(){
+        if MapManager.shared.cities == nil || MapManager.shared.countries == nil{
+            LocationChooserConfigurator().fetchCitiesAndCountries(success: { (cities, countries) in
+                MapManager.shared.cities = cities
+                MapManager.shared.countries = countries
+                if let presenter = self.presenter{
+                    presenter.bindData()
+                }
+            }) { (failureString) -> (Void) in
+                if let presenter = self.presenter {
+                    presenter.failedToLoadData()
+                }
+            }
+        }
     }
     
     func citiesForCountry(_ country:Country)->[City]{
-        guard let theCities = cities else {
+        guard let theCities = MapManager.shared.cities else {
             return [City]()
         }
         
@@ -55,59 +65,7 @@ class LocationChooserInteractor : LocationChooserPresenterInput {
         
     }
     
-    func fetchData(){
-        
-        LocationChooserConfigurator.getAllCountries(success: { (countries) in
-            self.countries = countries
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.notificationID), object: nil, userInfo:["success":true])
-
-        }) { (errorString) in
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.notificationID), object: nil, userInfo:["success":false])
-
-        }
-        
-        LocationChooserConfigurator.getAllCities(success: { (cities) in
-            self.cities = cities
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.notificationID), object: nil, userInfo:["success":true])
-            print("worked!")
-        }) { (failString) in
-            print(failString)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.notificationID), object: nil, userInfo:["success":false])
-
-        }
-
-    }
     
-    @objc func finishedRequest(notification: NSNotification){
-        requestsCounter += 1
-        guard let pres = presenter else {
-            return
-        }
-        guard let userInfo = notification.userInfo else {
-
-            pres.failedToLoadData()
-            return
-        }
-        
-        
-        if !(userInfo["success"] as! Bool){
-            flagRequestWithError = true
-        }
-        
-        if requestsCounter == totalRequests {
-            if flagRequestWithError {
-                pres.failedToLoadData()
-            }else{
-                self.finishedFetch()
-            }
-        }
-        
-    }
-    
-    func finishedFetch(){
-        guard let presenter = presenter else { return }
-        presenter.bindData()
-    }
     
 
     

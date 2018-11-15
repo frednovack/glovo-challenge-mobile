@@ -34,7 +34,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if flagAskPermission{
             flagAskPermission = false
-            interactor.checkForLocationPermission()
+            interactor.fetchDataAndCheckForGPSPermission()
         }
     }
 

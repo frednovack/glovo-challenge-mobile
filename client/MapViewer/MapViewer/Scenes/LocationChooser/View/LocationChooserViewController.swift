@@ -30,7 +30,7 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
         presenter.view = self
         interactor.presenter = presenter
         presenter.interactor = interactor
-        interactor.fetchData()
+        interactor.fetchDataIfNeeded()
         // Do any additional setup after loading the view.
     }
     
@@ -45,7 +45,7 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interactor.citiesForCountry(interactor.countries![section]).count
+        return interactor.citiesForCountry(MapManager.shared.countries![section]).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

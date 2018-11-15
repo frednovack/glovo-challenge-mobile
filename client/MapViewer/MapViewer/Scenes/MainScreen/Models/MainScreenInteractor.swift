@@ -36,6 +36,16 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
         
     }
     
+    func fetchDataAndCheckForGPSPermission(){
+        LocationChooserConfigurator().fetchCitiesAndCountries(success: { (cities, countries) in
+            MapManager.shared.cities = cities
+            MapManager.shared.countries = countries
+            self.checkForLocationPermission()
+        }) { (failString) -> (Void) in
+            //Do something
+        }
+    }
+    
     //MARK: - Location Managers
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last, let thePresenter = presenter else {
