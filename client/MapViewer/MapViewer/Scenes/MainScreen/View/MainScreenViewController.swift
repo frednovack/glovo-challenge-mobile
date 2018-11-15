@@ -31,7 +31,12 @@ class MainScreenViewController: UIViewController {
 
     }
 
-
+    @IBAction func action(_ sender: Any) {
+        LocationChooserViewController(origin: self).chooseLocation { (city) in
+            print("worked")
+        }
+    }
+    
     
     /*
     // MARK: - Navigation

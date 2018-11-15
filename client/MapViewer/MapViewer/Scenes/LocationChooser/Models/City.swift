@@ -7,7 +7,26 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class City {
+class City:Mappable {
+    
+    var workingArea:[String]!
+    var code:String!
+    var name:String!
+    var countryCode:String!
+    
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        workingArea <- map["working_area"]
+        code        <- map["code"]
+        name        <- map["name"]
+        countryCode <- map["country_code"]
+    }
+    
     
 }
