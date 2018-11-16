@@ -50,6 +50,26 @@ class LocationChooserConfigurator {
 
     }
     
+    func detailCity(city:City, success:@escaping ((City)->()), failure:@escaping ((String)->())){
+        Alamofire.request(BaseConnection.urlWithEndpoint("cities/\(city.code ?? "")"), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseObject { (response:DataResponse<City>) in
+            switch response.result {
+            case .success:
+                guard let result = response.value else {
+                    failure("Fail to parse object")
+                    return
+                }
+                
+                success(result)
+                
+                break
+            case .failure:
+                failure("Something is not right... request code > \(response.response?.statusCode ?? 1)")
+                break
+            }
+        }
+        
+    }
+    
     @objc func finishedRequest(notification: NSNotification){
         requestsCounter += 1
 

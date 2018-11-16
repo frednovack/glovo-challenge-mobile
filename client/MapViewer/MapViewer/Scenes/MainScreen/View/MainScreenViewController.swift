@@ -31,6 +31,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         interactor.presenter = presenter
+        presenter.interactor = interactor
         presenter.viewController = self
 
     }

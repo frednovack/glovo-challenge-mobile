@@ -15,6 +15,9 @@ class City:Mappable {
     var code:String!
     var name:String!
     var countryCode:String!
+    var currency:String?
+    var time_zone:String?
+    var busy:Bool?
     
     init(){
         
@@ -29,6 +32,9 @@ class City:Mappable {
         code        <- map["code"]
         name        <- map["name"]
         countryCode <- map["country_code"]
+        currency    <- map["currency"]
+        time_zone   <- map["time_zone"]
+        busy        <- map["busy"]
     }
     
     

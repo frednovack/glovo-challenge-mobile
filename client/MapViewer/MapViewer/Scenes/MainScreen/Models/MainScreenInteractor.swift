@@ -17,8 +17,7 @@ protocol MainScreenInteractorOutput {
     func focusMap(_ city:City)
 }
 
-class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
-    
+class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPresenterInput{
     let locationManager = CLLocationManager()
     var presenter:MainScreenInteractorOutput?
     var flagShouldCheckCoveredArea = true
@@ -56,6 +55,14 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate{
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
+    }
+    
+    func fetchDataForCity(_ city: City, success: @escaping ((City) -> ()), failure: @escaping ((String) -> (Void))) {
+        LocationChooserConfigurator().detailCity(city: city, success: { (cityDetailed) in
+            success(cityDetailed)
+        }) { (error) in
+            failure(error)
+        }
     }
     
     func checkIfLocationIsCovered(location:CLLocation){

@@ -10,10 +10,15 @@ import Foundation
 import CoreLocation
 import GoogleMaps
 
+protocol MainScreenPresenterInput{
+    func fetchDataForCity(_ city:City, success:@escaping ((City)->()), failure:@escaping ((String)->(Void)))
+}
+
 class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
 
     var viewController:MainScreenViewController?
     var askToChooseACity = false
+    var interactor:MainScreenPresenterInput?
     
     func updateMapWithUserPosition(location: CLLocation) {
         guard let _ = viewController else {
@@ -38,6 +43,16 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
             let path = GMSPath(fromEncodedPath: encondedPath)
             let polygon = GMSPolygon(path: path)
             polygon.map = vc.mapView
+        }
+        
+        if let interactor = interactor, let vc = viewController {
+            interactor.fetchDataForCity(city, success: { (detailedCity) in
+                vc.cityLabel.text = detailedCity.name
+                vc.currencyLabel.text = detailedCity.currency!
+                vc.timeZoneLabel.text = detailedCity.time_zone!
+            }) { (errorString) -> (Void) in
+                vc.contentView.isHidden = true
+            }
         }
         
         let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
