@@ -132,10 +132,9 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
         
         
         thePresenter.updateMapWithUserPosition(location: location)
-        if flagShouldCheckCoveredArea{
-            flagShouldCheckCoveredArea = false
-            checkIfLocationIsCovered(location: location)
-        }
+        flagShouldCheckCoveredArea = false
+        checkIfLocationIsCovered(location: location)
+        
 
     }
     

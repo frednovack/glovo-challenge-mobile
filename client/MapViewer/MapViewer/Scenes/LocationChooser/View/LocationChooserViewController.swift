@@ -35,6 +35,7 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func chooseLocation(completion:@escaping ((City)->())){
+        self.modalPresentationStyle = .overCurrentContext
         origin.present(self, animated: true, completion: nil)
         completionBlock = completion
     }
@@ -62,9 +63,6 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
         return presenter.countryName(section)
     }
     
-    @IBAction func action(_ sender: Any) {
-        completionBlock!(City())
-    }
     /*
     // MARK: - Navigation
 
