@@ -101,7 +101,10 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
                 let marker = GMSMarker(position: path.coordinate(at: 0))
                 marker.title = city.name
                 marker.userData = city
-               // marker.icon = UIImage(named: "glovo.png")
+                let icon = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+                icon.image = UIImage(named: "glovo.png")
+                icon.contentMode = .scaleAspectFit
+                marker.iconView = icon
                 markers.append(marker)
             }
             
