@@ -56,7 +56,7 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         guard let interactor = interactor, let vc = viewController else {return}
-        if position.zoom < 8.0 && markers.count == 0{
+        if position.zoom < 9.0 && markers.count == 0{
             //show markers
             markers = interactor.allCityMarkers()
             for marker in markers {
@@ -97,8 +97,16 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
             }
         }
         
-        let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
-        vc.mapView.camera = GMSCameraPosition.camera(withTarget: pointToFocus!.coordinate(at: 0), zoom: 13.0)
+        let bounds = GMSCoordinateBounds(path: GMSPath(fromEncodedPath:city.workingArea.first(where: {!$0.isEmpty})!)!)
+        for area in city.workingArea{
+            if let path = GMSPath(fromEncodedPath: area), !area.isEmpty {
+                bounds.includingPath(path)
+            }
+        }
+        let cameraUpdate = GMSCameraUpdate.fit(bounds)
+        vc.mapView.animate(with: cameraUpdate)
+//        let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
+//        vc.mapView.camera = GMSCameraPosition.camera(withTarget: pointToFocus!.coordinate(at: 0), zoom: 13.0)
 
     }
     
