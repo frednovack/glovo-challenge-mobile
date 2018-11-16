@@ -24,6 +24,7 @@
 		B65D7770219CE94E002321EB /* MapViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D776F219CE94E002321EB /* MapViewerTests.swift */; };
 		B65D777B219CE94E002321EB /* MapViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D777A219CE94E002321EB /* MapViewerUITests.swift */; };
 		B68F9428219E26D500F1CADF /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68F9427219E26D500F1CADF /* MapManager.swift */; };
+		B68F942E219E541F00F1CADF /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68F942D219E541F00F1CADF /* UIView+Utils.swift */; };
 		B6A33652219CF72400390692 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A33650219CF72400390692 /* StartViewController.swift */; };
 		B6A33653219CF72400390692 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6A33651219CF72400390692 /* StartViewController.xib */; };
 		B6A3365A219CF90A00390692 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A33658219CF90A00390692 /* MainScreenViewController.swift */; };
@@ -77,6 +78,7 @@
 		B68F9427219E26D500F1CADF /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		B68F9429219E340E00F1CADF /* coveredArea.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = coveredArea.gpx; sourceTree = "<group>"; };
 		B68F942A219E36CA00F1CADF /* uncoveredArea.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = uncoveredArea.gpx; sourceTree = "<group>"; };
+		B68F942D219E541F00F1CADF /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		B6A33650219CF72400390692 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		B6A33651219CF72400390692 /* StartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		B6A33658219CF90A00390692 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				B610E590219D103300A48C76 /* BaseConnection.swift */,
 				B68F9427219E26D500F1CADF /* MapManager.swift */,
+				B68F942D219E541F00F1CADF /* UIView+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				B68F9428219E26D500F1CADF /* MapManager.swift in Sources */,
 				B610E597219D1C2400A48C76 /* Country.swift in Sources */,
 				B65D775D219CE94D002321EB /* ViewController.swift in Sources */,
+				B68F942E219E541F00F1CADF /* UIView+Utils.swift in Sources */,
 				B6A3365A219CF90A00390692 /* MainScreenViewController.swift in Sources */,
 				B65D775B219CE94D002321EB /* AppDelegate.swift in Sources */,
 				B6A33652219CF72400390692 /* StartViewController.swift in Sources */,

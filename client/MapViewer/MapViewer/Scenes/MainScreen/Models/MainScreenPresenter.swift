@@ -44,8 +44,17 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
         
     }
     
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        guard let vc = viewController else {return}
+        vc.contentView.alpha = 0.4
+    }
+    
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        guard let vc = viewController else {return}
+        vc.contentView.alpha = 1
+    }
+    
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        print("position > \(position.zoom)")
         guard let interactor = interactor, let vc = viewController else {return}
         if position.zoom < 8.0 && markers.count == 0{
             //show markers
@@ -81,8 +90,8 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
         if let interactor = interactor, let vc = viewController {
             interactor.fetchDataForCity(city, success: { (detailedCity) in
                 vc.cityLabel.text = detailedCity.name
-                vc.currencyLabel.text = detailedCity.currency!
-                vc.timeZoneLabel.text = detailedCity.time_zone!
+                vc.currencyLabel.text = "Currency: \(detailedCity.currency!)"
+                vc.timeZoneLabel.text = "Time Zone: \(detailedCity.time_zone!)"
             }) { (errorString) -> (Void) in
                 vc.contentView.isHidden = true
             }

@@ -46,6 +46,7 @@ class MainScreenViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         contentView.layer.cornerRadius = 4
+        contentView.dropShadow(scale: true)
     }
 
     @IBAction func action(_ sender: Any) {
