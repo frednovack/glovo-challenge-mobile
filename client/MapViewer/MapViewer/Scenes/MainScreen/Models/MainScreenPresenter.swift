@@ -96,8 +96,9 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
                 vc.contentView.isHidden = true
             }
         }
-        
-        let bounds = GMSCoordinateBounds(path: GMSPath(fromEncodedPath:city.workingArea.last!)!)
+       
+        city.workingArea.sort(by: {$0.count > $1.count})
+        let bounds = GMSCoordinateBounds(path: GMSPath(fromEncodedPath:city.workingArea.first!)!)
         
         for area in city.workingArea{
             if let path = GMSPath(fromEncodedPath: area), !area.isEmpty {
