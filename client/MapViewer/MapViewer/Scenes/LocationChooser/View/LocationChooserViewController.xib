@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationChooserViewController" customModule="MapViewer" customModuleProvider="target">
             <connections>
+                <outlet property="contentView" destination="VTr-92-dho" id="dnI-VL-mFR"/>
                 <outlet property="tableView" destination="3QQ-jC-jpo" id="Bl6-KU-55H"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

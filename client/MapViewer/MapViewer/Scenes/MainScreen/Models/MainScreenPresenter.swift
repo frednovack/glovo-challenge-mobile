@@ -13,10 +13,10 @@ import GoogleMaps
 protocol MainScreenPresenterInput{
     func fetchDataForCity(_ city:City, success:@escaping ((City)->()), failure:@escaping ((String)->(Void)))
     func allCityMarkers()->[GMSMarker]
+    func retryConnection()
 }
 
 class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDelegate {
-
     var viewController:MainScreenViewController?{
         didSet{
             if let viewController = viewController{
@@ -97,13 +97,15 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
             }
         }
         
-        let bounds = GMSCoordinateBounds(path: GMSPath(fromEncodedPath:city.workingArea.first(where: {!$0.isEmpty})!)!)
+        let bounds = GMSCoordinateBounds(path: GMSPath(fromEncodedPath:city.workingArea.last!)!)
+        
         for area in city.workingArea{
             if let path = GMSPath(fromEncodedPath: area), !area.isEmpty {
                 bounds.includingPath(path)
+                
             }
         }
-        let cameraUpdate = GMSCameraUpdate.fit(bounds)
+        let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets())
         vc.mapView.animate(with: cameraUpdate)
 //        let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
 //        vc.mapView.camera = GMSCameraPosition.camera(withTarget: pointToFocus!.coordinate(at: 0), zoom: 13.0)
@@ -117,5 +119,17 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
         }
     }
     
+    func failedToGetData() {
+        guard let vc = viewController else {
+            return
+        }
+        let alert = UIAlertController(title: "Yo! Check your conection! 😅", message: "Something went wrong when trying to connect the server 🤷🏻‍♂️\n\nCan you try again?", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { (action) in
+            guard let interactor = self.interactor else {return}
+            interactor.retryConnection()
+        
+        }))
+        vc.present(alert, animated: true, completion: nil)
+    }
     
 }

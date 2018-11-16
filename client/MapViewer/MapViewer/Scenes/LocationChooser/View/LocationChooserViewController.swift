@@ -15,6 +15,8 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
     var interactor = LocationChooserInteractor()
     var presenter = LocationChooserPresenter()
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var contentView: UIView!
+    
     
     init(origin:UIViewController){
         self.origin = origin
@@ -32,6 +34,12 @@ class LocationChooserViewController: UIViewController, UITableViewDelegate, UITa
         presenter.interactor = interactor
         interactor.fetchDataIfNeeded()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        contentView.layer.cornerRadius = 5
+        contentView.clipsToBounds = true
     }
     
     func chooseLocation(completion:@escaping ((City)->())){

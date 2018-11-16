@@ -15,6 +15,7 @@ protocol MainScreenInteractorOutput {
     func chooseLocationManually()
     func chooseLocationWhenReady()
     func focusMap(_ city:City)
+    func failedToGetData()
 }
 
 class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPresenterInput{
@@ -55,6 +56,10 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
+    }
+    
+    func retryConnection() {
+        fetchDataAndCheckForGPSPermission()
     }
     
     func fetchDataForCity(_ city: City, success: @escaping ((City) -> ()), failure: @escaping ((String) -> (Void))) {
@@ -120,6 +125,9 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
             self.checkForLocationPermission()
         }) { (failString) -> (Void) in
             //Do something
+            if let presenter = self.presenter {
+                presenter.failedToGetData()
+            }
         }
     }
     
