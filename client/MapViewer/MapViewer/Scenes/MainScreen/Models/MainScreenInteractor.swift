@@ -92,6 +92,23 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
         
     }
     
+    func allCityMarkers() -> [GMSMarker] {
+        guard let cities = MapManager.shared.cities else {return [GMSMarker]()}
+        var markers = [GMSMarker]()
+        for city in cities {
+            let path = GMSPath(fromEncodedPath:city.workingArea.first(where: {!$0.isEmpty}) ?? "")
+            if let path = path {
+                let marker = GMSMarker(position: path.coordinate(at: 0))
+                marker.title = city.name
+                marker.userData = city
+               // marker.icon = UIImage(named: "glovo.png")
+                markers.append(marker)
+            }
+            
+        }
+        return markers
+    }
+    
     
     func fetchDataAndCheckForGPSPermission(){
         LocationChooserConfigurator().fetchCitiesAndCountries(success: { (cities, countries) in

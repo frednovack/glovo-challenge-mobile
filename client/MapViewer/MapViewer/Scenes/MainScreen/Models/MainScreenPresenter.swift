@@ -12,13 +12,23 @@ import GoogleMaps
 
 protocol MainScreenPresenterInput{
     func fetchDataForCity(_ city:City, success:@escaping ((City)->()), failure:@escaping ((String)->(Void)))
+    func allCityMarkers()->[GMSMarker]
 }
 
-class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
+class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDelegate {
 
-    var viewController:MainScreenViewController?
+    var viewController:MainScreenViewController?{
+        didSet{
+            if let viewController = viewController{
+                viewController.mapView.delegate = self
+            }
+        }
+    }
     var askToChooseACity = false
+    var markers = [GMSMarker]()
     var interactor:MainScreenPresenterInput?
+    
+    
     
     func updateMapWithUserPosition(location: CLLocation) {
         guard let _ = viewController else {
@@ -27,9 +37,31 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
         let marker = GMSMarker(position: location.coordinate)
         marker.title = "Current Location"
         marker.map = viewController!.mapView
+        marker.isTappable = true
+        
         let camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 13)
         viewController!.mapView.camera = camera
         
+    }
+    
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        print("position > \(position.zoom)")
+        guard let interactor = interactor, let vc = viewController else {return}
+        if position.zoom < 8.0 && markers.count == 0{
+            //show markers
+            markers = interactor.allCityMarkers()
+            for marker in markers {
+                marker.map = vc.mapView
+            }
+        }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard let city = marker.userData as? City else {return true}
+        
+        self.focusMap(city)
+        
+        return true
     }
     
     func chooseLocationWhenReady() {
@@ -38,7 +70,8 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput {
     
     func focusMap(_ city:City){
         guard let vc = viewController else {return}
-
+        vc.mapView.clear()
+        markers.removeAll()
         for encondedPath in city.workingArea {
             let path = GMSPath(fromEncodedPath: encondedPath)
             let polygon = GMSPolygon(path: path)
