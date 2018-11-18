@@ -71,8 +71,8 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
         }
     }
 
-    func checkIfLocationIsCovered(location:CLLocation){
-        guard let cities = MapManager.shared.cities else {return}
+    func checkIfLocationIsCovered(location:CLLocation)->Bool{
+        guard let cities = MapManager.shared.cities else {return false}
         var cityOfCoverage:City?
         for city in cities {
             for encondedPath in city.workingArea {
@@ -89,11 +89,13 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
             if let presenter = presenter {
                 presenter.focusMap(city)
             }
+            return true
         }else{
             print("User is not in Covered Area")
             if let presenter = presenter{
                 presenter.chooseLocationManually()
             }
+            return false
         }
         
     }

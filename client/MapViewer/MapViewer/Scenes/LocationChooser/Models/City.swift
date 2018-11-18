@@ -20,6 +20,10 @@ class City:Mappable {
     var busy:Bool?
     
     init(){
+        workingArea = [String]()
+        code = ""
+        name = ""
+        countryCode = ""
         
     }
     
