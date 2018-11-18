@@ -10,9 +10,10 @@ import Foundation
 
 
 class BaseConnection {
-    static let baseURL = "http://localhost:3000/api/"
+    
+    static let baseURL = Bundle.main.infoDictionary?["baseURL"] as? String ?? ""
     
     static func urlWithEndpoint(_ endpoint:String)->String{
-        return "\(baseURL)\(endpoint)"
+        return "\(baseURL)/api/\(endpoint)"
     }
 }

@@ -177,6 +177,8 @@
 		B610E58B219D097900A48C76 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B68F9429219E340E00F1CADF /* coveredArea.gpx */,
+				B68F942A219E36CA00F1CADF /* uncoveredArea.gpx */,
 				B610E590219D103300A48C76 /* BaseConnection.swift */,
 				B68F9427219E26D500F1CADF /* MapManager.swift */,
 				B68F942D219E541F00F1CADF /* UIView+Utils.swift */,
@@ -187,8 +189,6 @@
 		B65D774E219CE94D002321EB = {
 			isa = PBXGroup;
 			children = (
-				B68F9429219E340E00F1CADF /* coveredArea.gpx */,
-				B68F942A219E36CA00F1CADF /* uncoveredArea.gpx */,
 				B65D7759219CE94D002321EB /* MapViewer */,
 				B65D776E219CE94E002321EB /* MapViewerTests */,
 				B65D7779219CE94E002321EB /* MapViewerUITests */,

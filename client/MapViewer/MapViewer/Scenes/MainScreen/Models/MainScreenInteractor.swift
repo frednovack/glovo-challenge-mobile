@@ -15,6 +15,7 @@ protocol MainScreenInteractorOutput {
     func chooseLocationManually()
     func chooseLocationWhenReady()
     func focusMap(_ city:City)
+    func drawCities(_ cities:[City])
     func failedToGetData()
 }
 
@@ -69,9 +70,9 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
             failure(error)
         }
     }
-    
-    func checkIfLocationIsCovered(location:CLLocation){
-        guard let cities = MapManager.shared.cities else {return}
+
+    func checkIfLocationIsCovered(location:CLLocation)->Bool{
+        guard let cities = MapManager.shared.cities else {return false}
         var cityOfCoverage:City?
         for city in cities {
             for encondedPath in city.workingArea {
@@ -88,11 +89,13 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
             if let presenter = presenter {
                 presenter.focusMap(city)
             }
+            return true
         }else{
             print("User is not in Covered Area")
             if let presenter = presenter{
                 presenter.chooseLocationManually()
             }
+            return false
         }
         
     }
@@ -122,6 +125,9 @@ class MainScreenInteractor : NSObject, CLLocationManagerDelegate, MainScreenPres
         LocationChooserConfigurator().fetchCitiesAndCountries(success: { (cities, countries) in
             MapManager.shared.cities = cities
             MapManager.shared.countries = countries
+            if let presenter = self.presenter {
+                presenter.drawCities(cities)
+            }
             self.checkForLocationPermission()
         }) { (failString) -> (Void) in
             //Do something
