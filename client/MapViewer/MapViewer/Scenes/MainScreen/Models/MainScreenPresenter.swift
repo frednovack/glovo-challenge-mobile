@@ -28,7 +28,7 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
     var markers = [GMSMarker]()
     var interactor:MainScreenPresenterInput?
     
-    
+    //Mark: - Maps Handling
     
     func updateMapWithUserPosition(location: CLLocation) {
         guard let _ = viewController else {
@@ -73,21 +73,26 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
         return true
     }
     
-    func chooseLocationWhenReady() {
-        askToChooseACity = true
+    func drawArea(_ encodedPaths:[String], map:GMSMapView){
+        
+        
+        for encodedPath in encodedPaths {
+            guard let path = GMSMutablePath(fromEncodedPath: encodedPath) else {continue}
+            let polygon = GMSPolygon(path: path)
+            polygon.strokeWidth = 4
+            polygon.map = map
+        }
+
     }
     
     func focusMap(_ city:City){
         guard let vc = viewController else {return}
         vc.mapView.clear()
         markers.removeAll()
-        for encondedPath in city.workingArea {
-            let path = GMSPath(fromEncodedPath: encondedPath)
-            let polygon = GMSPolygon(path: path)
-            polygon.map = vc.mapView
-        }
         
-        if let interactor = interactor, let vc = viewController {
+        drawArea(city.workingArea, map: vc.mapView)
+        
+        if let interactor = interactor {
             interactor.fetchDataForCity(city, success: { (detailedCity) in
                 vc.cityLabel.text = detailedCity.name
                 vc.currencyLabel.text = "Currency: \(detailedCity.currency!)"
@@ -108,9 +113,13 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
         }
         let cameraUpdate = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets())
         vc.mapView.animate(with: cameraUpdate)
-//        let pointToFocus = GMSPath.init(fromEncodedPath: city.workingArea.first(where: {!$0.isEmpty})!)
-//        vc.mapView.camera = GMSCameraPosition.camera(withTarget: pointToFocus!.coordinate(at: 0), zoom: 13.0)
 
+    }
+    
+    //Mark: - Routing
+    
+    func chooseLocationWhenReady() {
+        askToChooseACity = true
     }
     
     func chooseLocationManually() {
