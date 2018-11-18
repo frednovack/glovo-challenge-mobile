@@ -17,6 +17,7 @@ protocol MainScreenPresenterInput{
 }
 
 class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDelegate {
+    
     var viewController:MainScreenViewController?{
         didSet{
             if let viewController = viewController{
@@ -62,6 +63,9 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
             for marker in markers {
                 marker.map = vc.mapView
             }
+            if let cities = MapManager.shared.cities{
+                drawCities(cities)
+            }
         }
     }
     
@@ -83,6 +87,13 @@ class MainScreenPresenter: NSObject, MainScreenInteractorOutput, GMSMapViewDeleg
             polygon.map = map
         }
 
+    }
+    
+    func drawCities(_ cities: [City]) {
+        guard let vc = viewController else {return}
+        for city in cities{
+            drawArea(city.workingArea, map: vc.mapView)
+        }
     }
     
     func focusMap(_ city:City){
